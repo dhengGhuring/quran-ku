@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 // Import Icons
-import { BsInstagram } from "react-icons/bs";
+import { BsInstagram, BsFacebook } from "react-icons/bs";
 
 const index = () => {
   return (
@@ -39,18 +39,25 @@ const index = () => {
           <Flex alignItems={"center"}>
             <Flex flexDir={"row"}>
               <Text color={"black"} fontWeight={400} fontSize={13}>
-                Copyright &copy;2023 - Make with ❤️ by dhengghuring
+                Copyright &copy;2023 - Made with ❤️ by dhengghuring
               </Text>
               {/* <Text color={"gray.500"} fontWeight={400} fontSize={14}></Text> */}
             </Flex>
           </Flex>
-          <Flex>
+          <Flex gap={2}>
             <a
               href="https://www.instagram.com/_dhengghuring/?hl=id"
               rel="noreferrer"
               target="_blank"
             >
               <IconButton icon={<BsInstagram />} size={"sm"} />
+            </a>
+            <a
+              href="https://www.facebook.com/ridho.ananta.54"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <IconButton icon={<BsFacebook />} size={"sm"} />
             </a>
             {/* <IconButton icon={<SearchIcon />} /> */}
           </Flex>
