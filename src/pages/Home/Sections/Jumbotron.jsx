@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Text, Image, Flex, Input } from "@chakra-ui/react";
 
 // Import Assets
-import ImageHero from "../../../assets/images/quran.jpg";
+import ImageHero from "../../../assets/images/quran.webp";
 
 export const Jumbotron = () => {
   return (
