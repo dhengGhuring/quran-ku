@@ -6,7 +6,6 @@ import { Box, Grid, GridItem, Text, Flex, Button } from "@chakra-ui/react";
 // React Router Dom
 import { Link } from "react-router-dom";
 export const CardListAyat = ({ dataSurah, querySearch }) => {
-  console.log(querySearch, "querySearch");
   return (
     <Box my={10}>
       <Grid

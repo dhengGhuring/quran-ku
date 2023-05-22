@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 
 // Libary
 import {
@@ -11,6 +11,7 @@ import {
   useDisclosure,
   Tooltip,
   Icon,
+  Button,
 } from "@chakra-ui/react";
 
 // Import Axios
@@ -24,13 +25,53 @@ import { Navbar } from "../../components";
 import { ModalDeskripsiSurat } from "./fragments/ModalDeskripsiSurat";
 
 // Import Icons
-import { IoCopy } from "react-icons/io5";
+import { IoCopy, IoPauseCircleSharp } from "react-icons/io5";
+import { IoMdPlayCircle } from "react-icons/io";
 
 const index = () => {
   const { id } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [detailSurah, setDetailSurah] = useState([]);
   const [detailAyat, setDetailAyat] = useState([]);
+
+  // function play audio
+  const AudioPlayer = ({ audioUrl }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = React.createRef();
+
+    const toggleAudio = () => {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    };
+
+    return (
+      <div>
+        <Flex
+          cursor={"pointer"}
+          border={"1px"}
+          w={"fit-content"}
+          p={2}
+          borderColor={"gray.300"}
+          rounded={"md"}
+          alignItems={"center"}
+          justifyItems={"center"}
+          onClick={toggleAudio}
+        >
+          {isPlaying ? (
+            <Icon as={IoPauseCircleSharp} />
+          ) : (
+            <Icon as={IoMdPlayCircle} />
+          )}
+          <audio ref={audioRef} src={audioUrl} />
+        </Flex>
+      </div>
+    );
+  };
+
   // get detail data with number of surah
   useEffect(() => {
     axios
@@ -43,8 +84,6 @@ const index = () => {
         console.log(err);
       });
   }, []);
-
-  console.log(detailAyat, "detailAyat");
 
   return (
     <Box>
@@ -61,36 +100,39 @@ const index = () => {
               <Text color={"black"} className="arab" fontSize={30}>
                 {item?.arab}
               </Text>
-              <Flex flexDir={"column"} gap={3}>
-                <Box
-                  border={"1px"}
-                  w={"fit-content"}
-                  px={2}
-                  borderColor={"gray.300"}
-                  rounded={"md"}
-                >
-                  <Text>{item?.number.inSurah}</Text>
-                </Box>
-                <Tooltip label="Salin Ayat & Arti" hasArrow rounded={"2xl"}>
-                  <Flex
-                    cursor={"pointer"}
+              <Flex flexDir={"column"} alignItems={"start"}>
+                <Flex flexDir={"column"} alignItems={"center"} gap={3}>
+                  <Box
                     border={"1px"}
                     w={"fit-content"}
-                    p={2}
+                    px={2}
                     borderColor={"gray.300"}
                     rounded={"md"}
-                    alignItems={"center"}
-                    justifyItems={"center"}
-                    // function copy text
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        `${item?.arab} ${item?.translation}`
-                      );
-                    }}
                   >
-                    <Icon as={IoCopy} w={3} h={3} />
-                  </Flex>
-                </Tooltip>
+                    <Text>{item?.number.inSurah}</Text>
+                  </Box>
+                  <Tooltip label="Salin Ayat & Arti" hasArrow rounded={"2xl"}>
+                    <Flex
+                      cursor={"pointer"}
+                      border={"1px"}
+                      w={"fit-content"}
+                      p={2}
+                      borderColor={"gray.300"}
+                      rounded={"md"}
+                      alignItems={"center"}
+                      justifyItems={"center"}
+                      // function copy text
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${item?.arab} ${item?.translation}`
+                        );
+                      }}
+                    >
+                      <Icon as={IoCopy} w={3} h={3} />
+                    </Flex>
+                  </Tooltip>
+                  <AudioPlayer audioUrl={item.audio.minshawi} />
+                </Flex>
               </Flex>
               <Text color={"black"} fontSize={18}>
                 {item?.translation}

@@ -27,7 +27,7 @@ const index = () => {
         console.log(err);
       });
   }, []);
-  console.log(dataSurah);
+
   return (
     <>
       <Container maxW={{ sm: "100%", md: "80%", lg: "80%" }}>
