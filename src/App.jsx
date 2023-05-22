@@ -8,8 +8,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 // Import Components
 import Layouts from "./components/Layouts";
 

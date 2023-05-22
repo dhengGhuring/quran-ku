@@ -39,6 +39,8 @@ const index = () => {
       });
   }, []);
 
+  console.log(detailSurah, "detailAyat");
+
   return (
     <Box>
       <ModalDeskripsiSurat

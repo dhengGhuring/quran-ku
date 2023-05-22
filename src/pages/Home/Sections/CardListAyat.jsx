@@ -5,16 +5,26 @@ import { Box, Grid, GridItem, Text, Flex, Button } from "@chakra-ui/react";
 
 // React Router Dom
 import { Link } from "react-router-dom";
-
-export const CardListAyat = ({ dataSurah }) => {
+export const CardListAyat = ({ dataSurah, querySearch }) => {
+  console.log(querySearch, "querySearch");
   return (
     <Box my={10}>
       <Grid
         templateColumns={{ md: "repeat(2, 1fr)", xl: "repeat(3, 1fr)" }}
         gap={6}
       >
-        {dataSurah.map((item, index) => {
-          return (
+        {dataSurah
+          .filter((qf) => {
+            if (!querySearch) {
+              return qf;
+            } else if (
+              qf.name.toLowerCase().includes(querySearch.toLowerCase())
+            ) {
+              return qf;
+            }
+            return false;
+          })
+          .map((item, index) => (
             <GridItem key={index}>
               <Box
                 shadow={"md"}
@@ -73,8 +83,7 @@ export const CardListAyat = ({ dataSurah }) => {
                 </Flex>
               </Box>
             </GridItem>
-          );
-        })}
+          ))}
       </Grid>
     </Box>
   );

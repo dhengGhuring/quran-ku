@@ -14,6 +14,7 @@ import { Footer } from "../../components";
 
 const index = () => {
   const [dataSurah, setDataSurah] = useState([]);
+  const [querySearch, setQuerySearch] = useState("");
 
   // get data from API in useEffect
   useEffect(() => {
@@ -26,13 +27,16 @@ const index = () => {
         console.log(err);
       });
   }, []);
-
+  console.log(dataSurah);
   return (
     <>
       <Container maxW={{ sm: "100%", md: "80%", lg: "80%" }}>
         <Box w={{ base: "100%", md: "100%", lg: "100%" }} my={50}>
-          <Jumbotron />
-          <CardListAyat dataSurah={dataSurah} />
+          <Jumbotron
+            querySearch={querySearch}
+            setQuerySearch={setQuerySearch}
+          />
+          <CardListAyat querySearch={querySearch} dataSurah={dataSurah} />
         </Box>
       </Container>
       <Footer />

@@ -6,7 +6,7 @@ import { Box, Text, Image, Flex, Input } from "@chakra-ui/react";
 // Import Assets
 import ImageHero from "../../../assets/images/quran.webp";
 
-export const Jumbotron = () => {
+export const Jumbotron = ({ querySearch, setQuerySearch }) => {
   return (
     <Box>
       <Box
@@ -51,9 +51,10 @@ export const Jumbotron = () => {
                 placeholder="Cari Surat Al-Quran disini"
                 variant={"filled"}
                 _focus={{ bg: "white" }}
+                onChange={(e) => setQuerySearch(e.target.value)}
               />
               <Text color={"white"} fontWeight={400} fontSize={15}>
-                Hasil pencarian tentang:{" "}
+                Hasil pencarian tentang:{querySearch}
               </Text>
             </Flex>
           </Flex>
