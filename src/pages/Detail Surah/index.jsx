@@ -9,6 +9,8 @@ import {
   Input,
   Container,
   useDisclosure,
+  Tooltip,
+  Icon,
 } from "@chakra-ui/react";
 
 // Import Axios
@@ -20,6 +22,9 @@ import { useParams } from "react-router-dom";
 // Import Components
 import { Navbar } from "../../components";
 import { ModalDeskripsiSurat } from "./fragments/ModalDeskripsiSurat";
+
+// Import Icons
+import { IoCopy } from "react-icons/io5";
 
 const index = () => {
   const { id } = useParams();
@@ -39,7 +44,7 @@ const index = () => {
       });
   }, []);
 
-  console.log(detailSurah, "detailAyat");
+  console.log(detailAyat, "detailAyat");
 
   return (
     <Box>
@@ -56,6 +61,37 @@ const index = () => {
               <Text color={"black"} className="arab" fontSize={30}>
                 {item?.arab}
               </Text>
+              <Flex flexDir={"column"} gap={3}>
+                <Box
+                  border={"1px"}
+                  w={"fit-content"}
+                  px={2}
+                  borderColor={"gray.300"}
+                  rounded={"md"}
+                >
+                  <Text>{item?.number.inSurah}</Text>
+                </Box>
+                <Tooltip label="Salin Ayat & Arti" hasArrow rounded={"2xl"}>
+                  <Flex
+                    cursor={"pointer"}
+                    border={"1px"}
+                    w={"fit-content"}
+                    p={2}
+                    borderColor={"gray.300"}
+                    rounded={"md"}
+                    alignItems={"center"}
+                    justifyItems={"center"}
+                    // function copy text
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `${item?.arab} ${item?.translation}`
+                      );
+                    }}
+                  >
+                    <Icon as={IoCopy} w={3} h={3} />
+                  </Flex>
+                </Tooltip>
+              </Flex>
               <Text color={"black"} fontSize={18}>
                 {item?.translation}
               </Text>
