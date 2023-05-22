@@ -16,14 +16,7 @@ import { BsInstagram, BsFacebook } from "react-icons/bs";
 
 const index = () => {
   return (
-    <Box
-      p={1}
-      w={"100%"}
-      shadow={"md"}
-      bottom={0}
-      border={"1px"}
-      borderColor={"gray.300"}
-    >
+    <Box p={1} w={"100%"} bottom={0} borderTop={"1px"} borderColor={"gray.300"}>
       <Container maxW={{ sm: "100%", md: "80%", lg: "80%" }}>
         <Flex
           gap={1}
